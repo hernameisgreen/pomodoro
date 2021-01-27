@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" cotimeetime="width=device-width, initial-scale=1.0">
+    <title>Documetime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="pomodoro.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid d-flex align-items-center justify-content-center flex-column">
+
+        <div class="focus d-flex flex-column ">
+            <div class="button-wrapper">
+                <input type="button" class="btn btn-success" value="focus" id="focus">
+                <input type="button" class="btn btn-primary" value="short break" id="shrt-brk">
+                <input type="button" class="btn btn-danger" value="long break" id="lg-brk">
+            </div>
+            <div class="pomodoro-wrapper">
+                <p id="pomo-time">25:00</p>
+            </div>
+            <p id="pomo-des" class="text-center">Your time starts now</p>
+            <input type="button" class="btn  mx-auto" value="start" id="start">
+        </div>
+    </div>
+</body>
+<script>
+   /*  const tomato = {
+        focus=25,
+        short_break=5,
+        long_break=15,
+        long_break_interval=4
+    } */
+    let focus=25
+    let focus_sec=00
+    let shrt_brk=5
+    let shrt_brk_sec=00
+    let lg_brk=15
+    let lg_brk_sec=00
+    document.addEventListener('DOMContentLoaded', ()=>{
+        let timeLeft=document.querySelector('#pomo-time')
+        const init_btn=document.querySelector('#focus')
+        let shrt_btn=document.querySelector('#shrt-brk')
+        let lg_btn=document.querySelector('#lg-brk')
+
+   
+    function countdown(){
+        setInterval(function(){
+            if(focus<=0&&focus_sec==0){
+                
+                clearInterval(timeLeft='00:00')
+            }
+            if(focus_sec==0){
+                focus_sec=59
+                focus-=1
+                if(focus<10){
+                    focus='0'+focus
+                }
+            }else{
+                focus_sec-=1
+                if(focus_sec<10){
+                    focus_sec='0'+focus_sec
+                }
+
+            }
+            timeLeft.innerHTML=focus+':'+focus_sec
+            
+            
+        },1000)
+    }
+    function shortbreak(){
+        setInterval(function(){
+            if(shrt_brk<=0&&shrt_brk_sec==0){
+                shrt_brk='0'+shrt_brk
+                clearInterval(timeLeft='00:00')
+            }
+            if(shrt_brk_sec==0){
+                shrt_brk_sec=59
+                shrt_brk-=1
+                if (shrt_brk<10){
+                    shrt_brk='0'+shrt_brk
+                }
+            }else{
+                shrt_brk_sec-=1
+                if(shrt_brk_sec<10){
+                    shrt_brk_sec='0'+shrt_brk_sec
+                }
+
+            }
+            timeLeft.innerHTML=shrt_brk+':'+shrt_brk_sec
+            
+            
+        },1000)
+    }
+    shrt_btn.addEventListener('click', shortbreak)
+    function longbreak(){
+        setInterval(function(){
+            if(lg_brk<=0&&lg_brk_sec==0){
+                lg_brk='0'+lg_brk
+                clearInterval(timeLeft='00:00')
+            }
+            if(lg_brk_sec==0){
+                lg_brk_sec=59
+                lg_brk-=1
+                if (lg_brk<10){
+                    lg_brk='0'+lg_brk
+                }
+            }else{
+                lg_brk_sec-=1
+                if(lg_brk_sec<10){
+                    lg_brk_sec='0'+lg_brk_sec
+                }
+
+            }
+            timeLeft.innerHTML=lg_brk+':'+lg_brk_sec
+            
+            
+        },1000)
+    }
+    lg_btn.addEventListener('click', longbreak)
+})
+</script>
+
+</html>
